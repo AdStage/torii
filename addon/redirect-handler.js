@@ -23,10 +23,14 @@ var RedirectHandler = Ember.Object.extend({
         windowObject.localStorage.setItem(pendingRequestKey, url);
 
         var remoteServiceName = configuration.remoteServiceName || 'popup';
-        if(remoteServiceName === 'popup'){
+        if(remoteServiceName === 'popup') {
           // NOTE : If a single provider has been configured to use the 'iframe'
           // service, this next line will still be called. It will just fail silently.
-          windowObject.close();
+          try {
+            windowObject.close();
+          } finally {
+
+          }
         }
       } else{
         reject('Not a torii popup');
